@@ -10,6 +10,13 @@ def main():
         layout="centered"
     )
     st.title(APP_TITLE)
+    st.markdown(
+    """
+    Generate a personalized study plan with the help of AI.
+
+    Choose your topic, current level and learning goal, then let the assistant create a structured roadmap for your learning.
+    """
+)
     st.write(
         "Generate a personalized learning plan with the help of Artificial Intelligence."
     )
@@ -35,12 +42,50 @@ def main():
         "University course"
         ]
     )
-    generate_button = st.button("Generate study plan")
+    generate_button = st.button(
+         "🚀 Generate Study Plan",
+        use_container_width=True
+    )
 
-    with st.spinner("AI is generating your study plan..."):
-        answer = generate_response(topic)
-    with st.container():
-        st.markdown(answer)
+    if generate_button:
+
+        if not topic:
+            st.warning("⚠️ Please enter a study topic.")
+
+        else:
+            with st.spinner("AI is generating your study plan..."):
+                answer = generate_response(
+                    topic,
+                    level,
+                    goal
+                )
+
+            with st.container():
+                st.divider()
+                st.subheader("📚 Your Personalized Study Plan")
+                st.markdown(answer)
+
+    with st.sidebar:
+
+        st.header("About")
+        st.write(
+            """
+            AI Study Assistant helps students create structured learning plans using Large Language Models.
+
+            Technologies
+
+            • Python 3.13
+
+            • Streamlit
+
+            • OpenRouter API
+
+            • Large Language Models (LLMs)
+
+            • Prompt Engineering
+            """
+        )
+        
 
 
 

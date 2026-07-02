@@ -15,8 +15,22 @@ client = OpenAI(
     api_key=API_KEY
 )
 
-def generate_response(topic: str) -> str:
+def generate_response(
+        topic: str,
+        level: str,
+        goal: str) -> str:
     try:
+        user_prompt = f"""
+            Create a personalized study plan using the following information.
+
+            Topic:
+            {topic}
+            Current Level:
+            {level}
+            Learning Goal:
+            {goal}
+        """        
+
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages = [
@@ -26,7 +40,7 @@ def generate_response(topic: str) -> str:
             },
             {
             "role": "user",
-            "content": topic
+            "content": user_prompt
             }
             ]
         )

@@ -18,13 +18,30 @@ def main():
         "Enter a topic",
         placeholder="For example: Machine Learning"
     )
+    level = st.radio(
+        "Select your current level",
+        [
+            "Beginner",
+            "Intermediate",
+            "Advanced"
+        ]
+    )
+    goal = st.selectbox(
+        "Learning goal",
+        [
+        "Learn from scratch",
+        "Prepare for interview",
+        "Prepare for exam",
+        "University course"
+        ]
+    )
     generate_button = st.button("Generate study plan")
 
     with st.spinner("AI is generating your study plan..."):
         answer = generate_response(topic)
     with st.container():
         st.markdown(answer)
-    
+
 
 
 

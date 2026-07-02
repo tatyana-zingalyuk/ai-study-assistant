@@ -1,5 +1,7 @@
 import streamlit as st
 from config import APP_TITLE
+from llm import generate_response
+
 
 def main():
     st.set_page_config(
@@ -17,6 +19,14 @@ def main():
         placeholder="For example: Machine Learning"
     )
     generate_button = st.button("Generate study plan")
+
+    with st.spinner("AI is generating your study plan..."):
+        answer = generate_response(topic)
+    with st.container():
+        st.markdown(answer)
+    
+
+
 
 
 

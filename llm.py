@@ -3,9 +3,14 @@ import os
 from dotenv import load_dotenv
 from prompts import SYSTEM_PROMPT
 from config import MODEL_NAME
+import streamlit as st
 
 load_dotenv()
+
 API_KEY = os.getenv("OPENROUTER_API_KEY")
+
+if API_KEY is None:
+    API_KEY = st.secrets.get("OPENROUTER_API_KEY")
 
 if API_KEY is None:
     raise ValueError("API key not found.")
